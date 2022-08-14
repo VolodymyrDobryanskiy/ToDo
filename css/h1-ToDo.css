@@ -1,0 +1,25 @@
+#textAnimation {
+    display: inline-block;
+    font-size: 70px;
+    text-align: center;
+    position: relative;
+    -webkit-text-stroke: 2px #3bc891;
+    color: transparent;
+}
+
+#textAnimation:after{
+    content: attr(data-text-anim);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    overflow: hidden;
+    color: #3bc891;
+    animation: textAnimation 5s ease-in-out infinite;
+}
+
+@keyframes textAnimation {
+    from{width: 0} to {width: 100%}
+    /*from{width: 100%} to {width: 0}*/
+}

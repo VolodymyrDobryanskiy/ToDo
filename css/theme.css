@@ -1,0 +1,57 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#checkbox{
+    display: none;
+}
+
+.switcher {
+    width: 40px;
+    height: 20px;
+    border: 2px solid yellow;
+    position: relative;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.ball, .fas {
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.fa-sun {
+    color: yellow;
+    left: 2px;
+    font-size: 1.5em;
+}
+
+.fa-moon {
+    color: #5c5cb2;
+    right: 2px;
+    font-size: 1.5rem;
+}
+
+.ball {
+    width: 15px;
+    height: 15px;
+    background-color: yellow;
+    border-radius: 50%;
+    left: 2px;
+    transition: all 0.6s ease;
+}
+
+.switcher[data-themes="night"] {
+    border: 2px solid #5c5cb2;
+}
+
+.switcher[data-themes="night"] .ball {
+    transform: translate(18px, -50%);
+    background: #5c5cb2;
+}
+
+.darkBody {
+    background-color: #374462;
+}
