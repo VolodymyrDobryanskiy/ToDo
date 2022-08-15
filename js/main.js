@@ -1,16 +1,13 @@
 const form = document.querySelector("#form");
 const taskInput = document.querySelector("#taskInput");
 const tasksList = document.querySelector("#tasksList");
-// const emptyList = document.querySelector("#emptyList");
 const removeDoneTasks = document.querySelector("#removeDoneTasks");
-
 
 let tasks = [];
 
 if (localStorage.getItem('tasks')) {
     tasks = JSON.parse(localStorage.getItem('tasks'));
     tasks.forEach( (task) => renderTasks(task));
-
 }
 
 form.addEventListener('submit', addTask);
@@ -21,8 +18,11 @@ tasksList.addEventListener('click', deleteTask);
 tasksList.addEventListener('click', doneTask);
 
 function checkEmptyList() {
+    const checkTheme = checkbox.checked ? "list-group-item empty-list darkLi" :
+                                                "list-group-item empty-list";
+
     if (tasks.length === 0) {
-        const emptyListHTML = `<li id="emptyList" class="list-group-item empty-list">
+        const emptyListHTML = `<li id="emptyList" class="${checkTheme}">
                                         <img src="./img/leaf.svg" alt="Empty" width="48" class="mt-3">
                                         <div class="empty-list__title">Список справ пустий</div>
                                      </li>`;
@@ -93,9 +93,11 @@ function saveToLocalStorage() {
 
 function renderTasks(task) {
     const cssClass = task.done ? "task-title task-title--done" : "task-title";
+    const checkTheme = checkbox.checked ? "list-group-item d-flex justify-content-between task-item darkLi" :
+                                                 "list-group-item d-flex justify-content-between task-item";
 
     tasksList.insertAdjacentHTML('beforeend', `
-                                                <li id="${task.id}" class="list-group-item d-flex justify-content-between task-item">
+                                                <li id="${task.id}" class="${checkTheme}">
                                                     <span class="${cssClass}">${task.text}</span>
                                                     <div class="task-item__buttons">
                                                         <button type="button" data-action="done" class="btn-action">
@@ -112,19 +114,13 @@ removeDoneTasks.addEventListener('click', () => {
     const removeTasks = tasks.filter( (task) => task.done === true);
 
     if (removeTasks.length === 0) {
-        console.log("Функція не спрацювала");
         alert("Виконаних завдань не має!)");
         return;
     }
 
-    let removeTasksId = [];
-    removeTasks.forEach((task) => removeTasksId.push(task.id));
-
     tasks = tasks.filter( (task) => task.done === false);
     saveToLocalStorage();
 
-    for (let i = 0; i < removeTasksId.length; i++) {
-        document.getElementById(`${removeTasks[i].id}`).remove();
-    }
+    for (let key in removeTasks) document.getElementById(`${removeTasks[key].id}`).remove();
     checkEmptyList();
-})
+});
