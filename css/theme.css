@@ -54,4 +54,13 @@
 
 .darkBody {
     background-color: #374462;
+    color: #ffffff;
+}
+
+.darkLi {
+    background-color: #52586d;
+}
+
+.card {
+    border: 1px solid white;
 }
